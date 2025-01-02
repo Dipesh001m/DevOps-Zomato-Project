@@ -9,13 +9,13 @@
 $ switch to root user ---> sudo su
 $ sudo apt update -y
 
-4. Install AWS CLI
+5. Install AWS CLI
 sudo apt install unzip -y
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
 
-5. Install Jenkins on Ubuntu
+6. Install Jenkins on Ubuntu
 (Reference URL for commands: https://www.jenkins.io/doc/book/installing/linux/#debianubuntu)
 #!/bin/bash
 sudo apt update -y
@@ -71,9 +71,11 @@ Verifiy Trivy installation: trivy --version
 
 8. Install Docker Scout
 Make sure to Login to DockerHub account in browser
-<Follow the process as explained in the video>
+curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s -- -b /usr/local/bin
+Give permission: chmod 777 /var/run/docker.sock
 
-9. Install SonarQube using Docker
+
+10. Install SonarQube using Docker
 $ docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
 $ docker ps (You can see SonarQube container)
 
@@ -174,8 +176,8 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker') {
-                        sh "docker tag zomato kastrov/zomato:latest "
-                        sh "docker push kastrov/zomato:latest "
+                        sh "docker tag zomato dipeshmandal123/zomato:latest "
+                        sh "docker push dipeshmandal123/zomato:latest "
                     }
                 }
             }
@@ -184,16 +186,16 @@ pipeline {
             steps {
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh 'docker-scout quickview kastrov/zomato:latest'
-                       sh 'docker-scout cves kastrov/zomato:latest'
-                       sh 'docker-scout recommendations kastrov/zomato:latest'
+                       sh 'docker-scout quickview dipeshmandal123/zomato:latest'
+                       sh 'docker-scout cves dipeshmandal123/zomato:latest'
+                       sh 'docker-scout recommendations dipeshmandal123/zomato:latest'
                    }
                 }
             }
         }
         stage ("Deploy to Container") {
             steps {
-                sh 'docker run -d --name zomato -p 3000:3000 kastrov/zomato:latest'
+                sh 'docker run -d --name zomato -p 3000:3000 dipeshmandal123/zomato:latest'
             }
         }
     }
@@ -216,7 +218,7 @@ pipeline {
                 </body>
                 </html>
             """,
-            to: 'kastrokiran@gmail.com',
+            to: 'dhanushmandal979@gmail.com',
             mimeType: 'text/html',
             attachmentsPattern: 'trivy.txt'
         }

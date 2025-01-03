@@ -704,11 +704,4 @@ Goto Prometheus and reload. Goto ArgoCD and reload to see whether the pipeline i
 Copy the public ip of "nodeIP" which we have done exactly 4 steps above this line ---> Goto browser and paste it:30001 ----> Make sure to open the port 30001 for the "nodeIP:" VM ----> You will see the application
 
 Note: If you see error in Prometheus under "k8s", open port number 9100 for the EC2 instances which were created as part of EKS cluster i.e nodes
-
-After everything is done. Delete everything. Make sure to delete the Cloud Formation Stacks.
-
-========================================================================================================
-Kind Request:
-Once after you have successfully deployed the App, kindly share your experience on LinkedIn by Tagging me and also provide the YouTube link of this project in your post, as it helps others to access the video quickly. 
-========================================================================================================
 												HAPPY LEARNING

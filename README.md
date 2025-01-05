@@ -10,12 +10,14 @@ $ switch to root user ---> sudo su
 $ sudo apt update -y
 
 5. Install AWS CLI
+```
 sudo apt install unzip -y
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
+```
 
-6. Install Jenkins on Ubuntu
+7. Install Jenkins on Ubuntu
 (Reference URL for commands: https://www.jenkins.io/doc/book/installing/linux/#debianubuntu)
 #!/bin/bash
 sudo apt update -y

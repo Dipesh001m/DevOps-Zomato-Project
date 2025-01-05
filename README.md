@@ -743,7 +743,7 @@ In the above, to get the "nodeIP", goto EKS in AWS ----> Click on EKS Cluster --
 
 The static_configs section specifies the targets to scrape metrics from, and in this case, it's set to nodeip:9001.
 
-----> esc ----> :wq ----> promtool check config /etc/prometheus/prometheus.yml ----> You should see "Success" ----> Check the validity of the configuration file ----> promtool check config /etc/prometheus/prometheus.yml ----> curl -X POST http://localhost:9090/-/reload
+----> esc ----> :wq ----> ```promtool check config /etc/prometheus/prometheus.yml``` ----> You should see "Success" ----> Check the validity of the configuration file ----> ```promtool check config /etc/prometheus/prometheus.yml``` ----> curl -X POST http://localhost:9090/-/reload
 
 Goto Prometheus and reload. Goto ArgoCD and reload to see whether the pipeline is done or not
 

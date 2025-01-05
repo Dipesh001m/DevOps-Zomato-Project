@@ -41,8 +41,7 @@ Verifiy Jenkins installation: jenkins --version
 5.1. Open Port No. 8080 for VM and access Jenkins
 5.2. Setup Jenkins by following the necessary steps
 
-6. Install Docker on Ubuntu
-(Reference URL for commands: https://docs.docker.com/engine/install/ubuntu/)
+
 
 # Add Docker's official GPG key:
 sudo apt-get update

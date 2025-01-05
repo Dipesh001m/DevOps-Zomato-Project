@@ -1,4 +1,5 @@
 # DevOps-Zomato-Project
+<img src="assets/project-4.png" alt="Zomato Application" width="500">
 
 
 1. Launch an Instance (Ubuntu, 24.04, t2.large, 30 GB)

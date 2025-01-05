@@ -3,7 +3,7 @@
 
 1. Launch an Instance (Ubuntu, 24.04, t2.large, 30 GB)
 
-### 2. Connect to the instance
+2. Connect to the instance
 
 ### 3. Update the packages
 $ switch to root user ---> sudo su
@@ -11,7 +11,7 @@ $ switch to root user ---> sudo su
 $ sudo apt update -y
 ```
 
-### 5. Install AWS CLI
+## 5. Install AWS CLI
 ```
 sudo apt install unzip -y
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -19,7 +19,7 @@ unzip awscliv2.zip
 sudo ./aws/install
 ```
 
-### 7. Install Jenkins on Ubuntu
+## 7. Install Jenkins on Ubuntu
 (Reference URL for commands: https://www.jenkins.io/doc/book/installing/linux/#debianubuntu)
 ```
 #!/bin/bash
@@ -44,12 +44,15 @@ Verifiy Jenkins installation: jenkins --version
 
 
 # Add Docker's official GPG key:
+```
 sudo apt-get update
 sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
+```
 # Add the repository to Apt sources:
+```
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
@@ -60,66 +63,54 @@ sudo usermod -aG docker ubuntu
 sudo chmod 777 /var/run/docker.sock
 newgrp docker
 sudo systemctl status docker
-
+```
 Verifiy Docker installation: docker --version
 
-7. Install Trivy on Ubuntu
+
+# 7. Install Trivy on Ubuntu
 (Reference URL for commands: https://aquasecurity.github.io/trivy/v0.55/getting-started/installation/)
+```
 sudo apt-get install wget apt-transport-https gnupg
 wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
 echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
 sudo apt-get update
 sudo apt-get install trivy
-
+```
 Verifiy Trivy installation: trivy --version
 
-8. Install Docker Scout
+
+## 8. Install Docker Scout
 Make sure to Login to DockerHub account in browser
+```
 curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s -- -b /usr/local/bin
+```
 Give permission: chmod 777 /var/run/docker.sock
 
 
-10. Install SonarQube using Docker
+## 10. Install SonarQube using Docker
+```
 $ docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+```
 $ docker ps (You can see SonarQube container)
 
-<Follow the process as explained in the video>
 
-10. Installation of Plugins in Jenkins
-Install below plugins:
-<Follow the process as explained in the video>
+# 10. Installation of Plugins in Jenkins
+## Install below plugins:
 
-11. SonarQube configuration in Jenkins
-<Follow the process as explained in the video>
-
-11.1. Tools Configuration in Jenkins
-<Follow the process as explained in the video>
-
-11.2. Configuration of SonarQube Token in Jenkins
-<Follow the process as explained in the video>
-
-Lets create another credentials for DockerHub. This is being done because, as soon as the docker image is created, it should get pushed to dockerhub. 
-<Follow the process as explained in the video>
-
-11.3 Configuration of Email notification in Jenkins
-As soon as the build happens, i need to get an email notification to do that we have to configure our email.
-<Follow the process as explained in the video>
+### 11. SonarQube configuration in Jenkins
+### 11.1. Tools Configuration in Jenkins
+### 11.2. Configuration of SonarQube Token in Jenkins 
+### 11.3 Configuration of Email notification in Jenkins
+### 12. System Configuration in Jenkins
+### 13. Create webhook in SonarQube
 
 
-12. System Configuration in Jenkins
-<Follow the process as explained in the video>
-
-13. Create webhook in SonarQube
-<Follow the process as explained in the video>
-
-14. Create Pipeline Job
-Before pasting the pipeline script, do the following changes in the script
-1. In the stage 'Tag and Push to DockerHub', give your docker-hub username. Similar thing you should do in 'DockerScoutImage', 'Deploy to container' stages
-2. In post actions stage in pipeline, make sure to give the email id you have configured in jenkins.
+## 14. Create Pipeline Job
 
 *********************
 Pipeline Script
 *********************
+```
 pipeline {
     agent any
     tools {
@@ -228,17 +219,19 @@ pipeline {
         }
     }
 }
+```
 
 
 
-If the build stage of "OWASP FS SCAN" shows 'UNSTABLE BUILD' replace the below script in OWASP FS SCAN stage
+### If the build stage of "OWASP FS SCAN" shows 'UNSTABLE BUILD' replace the below script in OWASP FS SCAN stage
+```
 stage('OWASP FS SCAN') {
     steps {
         dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit --update -n', odcInstallation: 'DP-Check'
         dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
     }
 }
-
+```
 
 Let the pipeline gets built. Meanwhile we will create VMs for monitoring.
 

@@ -3,13 +3,15 @@
 
 1. Launch an Instance (Ubuntu, 24.04, t2.large, 30 GB)
 
-2. Connect to the instance
+### 2. Connect to the instance
 
-3. Update the packages
+### 3. Update the packages
 $ switch to root user ---> sudo su
+```
 $ sudo apt update -y
+```
 
-### ** 5. Install AWS CLI*
+### 5. Install AWS CLI
 ```
 sudo apt install unzip -y
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -17,8 +19,9 @@ unzip awscliv2.zip
 sudo ./aws/install
 ```
 
-7. Install Jenkins on Ubuntu
+### 7. Install Jenkins on Ubuntu
 (Reference URL for commands: https://www.jenkins.io/doc/book/installing/linux/#debianubuntu)
+```
 #!/bin/bash
 sudo apt update -y
 wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | sudo tee /etc/apt/keyrings/adoptium.asc
@@ -32,7 +35,7 @@ sudo apt-get update -y
 sudo apt-get install jenkins -y
 sudo systemctl start jenkins
 sudo systemctl status jenkins
-
+```
 Verifiy Jenkins installation: jenkins --version
 
 5.1. Open Port No. 8080 for VM and access Jenkins

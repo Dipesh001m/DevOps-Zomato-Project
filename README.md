@@ -222,6 +222,14 @@ pipeline {
 }
 ```
 
+### if you want to use trivy for docker image scan than you can use this pipeline 
+```
+stage ("Trivy images Scan") {
+            steps {
+                sh "trivy image dipeshmandal123/zomato:latest > trivy.txt"
+            }
+        }
+```
 
 
 ### If the build stage of "OWASP FS SCAN" shows 'UNSTABLE BUILD' replace the below script in OWASP FS SCAN stage
